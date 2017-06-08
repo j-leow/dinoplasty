@@ -6,6 +6,9 @@ const app = {
     document
       .querySelector(selectors.formSelector)
       .addEventListener('submit', this.addDino.bind(this))
+    this.template = document
+      .querySelector(selectors.templateSelector)
+
   },
 
   addDino(ev) {
@@ -39,4 +42,5 @@ const app = {
 app.init({
   formSelector: '#dino-form',
   listSelector: '#dino-list',
+  templateSelector: '.dino.template'
 })
