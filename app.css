@@ -1,3 +1,7 @@
 .template {
   visibility: hidden;
 }
+
+.actions {
+  float: right;
+}
