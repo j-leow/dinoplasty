@@ -24,11 +24,17 @@ const app = {
     this.list.appendChild(listItem)
 
     this.dinos.unshift(dino)
+    this.save()   //this - the object because we called it by method
 
     ++ this.max
 
     ev.target.reset()
   },
+
+  save() {
+    localStorage
+      .setItem('dinos', JSON.stringify(this.dinos))
+  }
 
   renderListItem(dino) {
     const item = this.template.cloneNode(true)
@@ -56,6 +62,7 @@ const app = {
         break;
       }
     }
+    this.save()
   },
 }
 
