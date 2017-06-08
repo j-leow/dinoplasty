@@ -20,7 +20,7 @@ const app = {
     this.list.insertBefore(listItem, this.list.firstChild)
     this.list.appendChild(listItem)
 
-    this.dinos.push(dino)
+    this.dinos.unshift(dino)
 
     ++ this.max
 
