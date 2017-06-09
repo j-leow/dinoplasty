@@ -11,6 +11,7 @@ const app = {
       .addEventListener('submit', this.addDinoFromForm.bind(this))
 
     this.load()
+
   },
 
   load() {
@@ -19,8 +20,6 @@ const app = {
 
     // convert the JSON back into an array
     const dinoArray = JSON.parse(dinoJSON)
-
-    console.log(dinoArray)
 
     // set this.dinos with the dinos from that array
     if (dinoArray) {
@@ -35,9 +34,12 @@ const app = {
     this.list.insertBefore(listItem, this.list.firstChild)
 
     this.dinos.unshift(dino)
-    this.save()
 
-    ++ this.max
+    if (dino.id > this.max) {
+      this.max = dino.id
+    }
+console.log(dino.id)
+    this.save()
   },
 
   addDinoFromForm(ev) {
@@ -48,6 +50,7 @@ const app = {
       name: ev.target.dinoName.value,
     }
 
+    console.log(dino.id)
     this.addDino(dino)
 
     ev.target.reset()
@@ -63,8 +66,6 @@ const app = {
     item.classList.remove('template')
     item.dataset.id = dino.id
 
-    console.log(dino.id)
-
     item
       .querySelector('.dino-name')
       .textContent = dino.name
@@ -79,6 +80,7 @@ const app = {
   removeDino(ev) {
     const listItem = ev.target.closest('.dino')
     listItem.remove()
+
 
     for (let i = 0; i < this.dinos.length; i++) {
       const currentId = this.dinos[i].id.toString()
