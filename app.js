@@ -38,7 +38,7 @@ const app = {
     if (dino.id > this.max) {
       this.max = dino.id
     }
-console.log(dino.id)
+
     this.save()
   },
 
@@ -74,8 +74,48 @@ console.log(dino.id)
       .querySelector('button.remove')
       .addEventListener('click', this.removeDino.bind(this))
 
+    item
+      .querySelector('button.fav')
+      .addEventListener('click', this.addFav.bind(this))
+
     return item
   },
+
+  addFav(ev){
+    const listItem = ev.target
+    const element = listItem.parentElement.parentNode
+
+    listItem
+      .parentElement.parentElement
+      .style.backgroundColor = 'gold'
+
+    listItem
+      .addEventListener('click', this.removeFav.bind(this))
+  },
+
+  removeFav(ev) {
+    const listItem = ev.target
+
+    listItem
+      .parentElement.parentElement
+      .style.background = 'none'
+    listItem
+      .addEventListener('click', this.addFav.bind(this))
+  },
+  //
+  // addFav(ev) {
+  //   ev.preventDefault()
+  //   const listItem = ev.target.parentElement.parentNode
+  //
+  //   listItem.parentElement.parentElement.backgroundColor = '#ffc700'
+    //
+    // if (listItem.parentElement.parentElement.style.backgroundColor === '#ffc700') {
+    //   listItem.parentElement.backgroundColor = '#fefefe'
+    // }
+    // else {
+    //   listItem.parentElement.parentElement.style.backgroundColor = '#ffc700'
+    // }
+  // },
 
   removeDino(ev) {
     const listItem = ev.target.closest('.dino')
