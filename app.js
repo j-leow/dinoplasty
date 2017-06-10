@@ -83,7 +83,7 @@ const app = {
 
   addFav(ev){
     const listItem = ev.target
-    const element = listItem.parentElement.parentNode
+    const element = listItem.closest('.dino')
 
     listItem
       .parentElement.parentElement
@@ -102,20 +102,6 @@ const app = {
     listItem
       .addEventListener('click', this.addFav.bind(this))
   },
-  //
-  // addFav(ev) {
-  //   ev.preventDefault()
-  //   const listItem = ev.target.parentElement.parentNode
-  //
-  //   listItem.parentElement.parentElement.backgroundColor = '#ffc700'
-    //
-    // if (listItem.parentElement.parentElement.style.backgroundColor === '#ffc700') {
-    //   listItem.parentElement.backgroundColor = '#fefefe'
-    // }
-    // else {
-    //   listItem.parentElement.parentElement.style.backgroundColor = '#ffc700'
-    // }
-  // },
 
   removeDino(ev) {
     const listItem = ev.target.closest('.dino')
