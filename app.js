@@ -48,6 +48,7 @@ const app = {
     const dino = {
       id: this.max + 1,
       name: ev.target.dinoName.value,
+      era: ev.target.dinoEra.value,
     }
 
     console.log(dino.id)
@@ -78,6 +79,10 @@ const app = {
       .querySelector('button.fav')
       .addEventListener('click', this.addFav.bind(this))
 
+    item
+      .querySelector('button.up')
+      .addEventListener('click', this.moveUp.bind(this))
+
     return item
   },
 
@@ -101,6 +106,23 @@ const app = {
       .style.background = 'none'
     listItem
       .addEventListener('click', this.addFav.bind(this))
+  },
+
+  moveUp(ev) {
+    const listItem = ev.target
+    const element = listItem.closest('dino')
+
+    //TODO: ADD MOVE UP AND MOVE DOWN FUNCTION
+
+  },
+
+  moveDown(ev) {
+
+
+  },
+
+  editItem() {
+    //TODO: Make the edit item method
   },
 
   removeDino(ev) {
