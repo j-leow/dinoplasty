@@ -51,7 +51,6 @@ const app = {
       era: ev.target.dinoEra.value,
     }
 
-    console.log(dino.id)
     this.addDino(dino)
 
     ev.target.reset()
@@ -60,6 +59,7 @@ const app = {
   save() {
     localStorage
       .setItem('dinos', JSON.stringify(this.dinos))
+    //console.log(this.dinos)  //Uncomment to check that array is correctly stored.
   },
 
   renderListItem(dino) {
@@ -81,7 +81,11 @@ const app = {
 
     item
       .querySelector('button.up')
-      .addEventListener('click', this.moveUp.bind(this))
+      .addEventListener('click', this.moveUp.bind(this, dino))
+
+    item
+      .querySelector('button.down')
+      .addEventListener('click', this.moveDown.bind(this, dino))
 
     return item
   },
@@ -108,17 +112,36 @@ const app = {
       .addEventListener('click', this.addFav.bind(this))
   },
 
-  moveUp(ev) {
-    const listItem = ev.target
-    const element = listItem.closest('dino')
+  moveUp(dino, ev) {
+    ev.preventDefault()
+    const listItem = ev.target.closest('.dino')
+    this.list
+      .insertBefore(listItem, listItem.previousElementSibling)
+    //Now change the index of the array
+    const index = this.dinos.findIndex((listItem, i) => {
+      return listItem.id === dino.id
+    })
 
-    //TODO: ADD MOVE UP AND MOVE DOWN FUNCTION
-
+    const swapDinos = this.dinos[index]
+    this.dinos[index] = this.dinos[index-1]
+    this.dinos[index-1] = swapDinos
+    this.save()
   },
 
-  moveDown(ev) {
+  moveDown(dino, ev) {
+    ev.preventDefault()
+    const listItem = ev.target.closest('.dino')
+    this.list
+      .insertBefore(listItem.nextSibling, listItem)
+    //Now change the index of the array
+    const index = this.dinos.findIndex((listItem, i) => {
+      return listItem.id === dino.id
+    })
 
-
+    const swapDinos = this.dinos[index]
+    this.dinos[index] = this.dinos[index+1]
+    this.dinos[index+1] = swapDinos
+    this.save()
   },
 
   editItem() {
